@@ -5,6 +5,7 @@ import sqlite3
 import copy
 import pygame
 from pygame import *
+import time
 
 colors = [(244, 122, 66),(181, 244, 65),(65, 244, 181), (65, 190, 244),(65, 65, 244),(181, 65, 244), (244, 65, 151), (244, 65, 67)]
 color_red = (178, 35, 19)
@@ -53,7 +54,7 @@ class GUI(object):
             if i != 0:
                 location_previous = city_location_on_map[individual.getPhenotype()[i - 1]]
                 location_current = city_location_on_map[individual.getPhenotype()[i]]
-                pygame.draw.line(self.screen, color, [location_previous[0], location_previous[1]],[location_current[0], location_current[1]], 4)
+                pygame.draw.line(self.screen, color, [location_previous[0], location_previous[1]],[location_current[0], location_current[1]], 2)
 
         # Draw some text.
         label = self.font.render("GENERATIE : "+ str(generation_number), False, color_red)
@@ -227,3 +228,9 @@ print(best_individual.getPhenotype())
 print(fitness(best_individual))
 # Close database connection.
 c.close()
+while True:
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            break
+        elif event.type == MOUSEBUTTONDOWN:
+            pos = pygame.mouse.get_pos()
